@@ -1,10 +1,10 @@
 from django.db import models
-from django.conf import settings
+from django.contrib.auth.models import AbstractUser
 
 
-class Profile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='profile')
+class Applicant(AbstractUser):
+   
     avatar = models.ImageField(blank=True)
     bio = models.TextField(max_length=500)
     def __str__(self) -> str:
-        return self.user.username
+        return self.username

@@ -1,11 +1,11 @@
 from django.db import models
-from user.models import Profile
+from user.models import Applicant
 from django.utils.translation import gettext_lazy
 
 class Job(models.Model):
     title = models.CharField(max_length=255)
     company = models.CharField(max_length=255)
-    applicant = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    applicant = models.ForeignKey(Applicant, on_delete=models.CASCADE)
     applied_date = models.DateField(auto_now_add=True)
     modefied_date = models.DateField(auto_now=True)
 
