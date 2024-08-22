@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from rest_framework import generics
+from .models import Applicant
+from .serialiers import ApplicantSeralizer
 
-# Create your views here.
+class ApplicantDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Applicant.objects.all()
+    serializer_class = ApplicantSeralizer
