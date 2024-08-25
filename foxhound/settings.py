@@ -69,7 +69,7 @@ CORS_ORIGIN_WHITELIST = (
     'http://localhost:8000',
 )
 
-CSRF_TRUSTED_ORIGINS = ["http://localhost:4200"] 
+CSRF_TRUSTED_ORIGINS = ["http://localhost:4200",] 
 
 ROOT_URLCONF = 'foxhound.urls'
 
@@ -151,7 +151,7 @@ AUTH_USER_MODEL  = "user.Applicant"
 
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES":[
-        "rest_framework.permissions.AllowAny"
+        "rest_framework.permissions.IsAuthenticated"
     ],
     "DEFAULT_AUTHENTICATION_CLASSES":[
         "rest_framework.authentication.SessionAuthentication",

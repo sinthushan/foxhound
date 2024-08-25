@@ -12,9 +12,9 @@ class JobSerializer(serializers.ModelSerializer):
         model = Job
         fields = [
             'id',
+            'applicant', 
             'title',
             'company',
-            'applicant', 
             'applied_date', 
             'modefied_date',
             'stages'
@@ -22,11 +22,13 @@ class JobSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = [
             'id',
+            'applicant', 
             'applied_date', 
             'modefied_date',
             'stages'
         ]
     def create(self, validated_data):
-        job = Job.objects.create(**validated_data)
+        user =  self.context['request'].user
+        job = Job.objects.create(applicant=user,**validated_data)
         Stage.objects.create(comment = f"Applied for {job.title} at {job.company}", round = 0, job=job)
         return job
