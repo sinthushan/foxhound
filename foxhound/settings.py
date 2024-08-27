@@ -41,13 +41,13 @@ INSTALLED_APPS = [
     # 3rd-party apps
     'rest_framework',
     'corsheaders',
-    'rest_framework.authtoken',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'rest_framework_simplejwt',
     'dj_rest_auth',
     'dj_rest_auth.registration',
+    'rest_framework_simplejwt.token_blacklist',
     # Local
     'job',
     'user.apps.UserConfig'
@@ -155,20 +155,22 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.IsAuthenticated"
     ],
     "DEFAULT_AUTHENTICATION_CLASSES":[
-        "rest_framework.authentication.SessionAuthentication",
-        "rest_framework.authentication.TokenAuthentication",
         'dj_rest_auth.jwt_auth.JWTCookieAuthentication'
     ]
 }
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(hours=1),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
+
 }
 
 # dj-rest-auth
 REST_AUTH = {
+    "TOKEN_MODEL":None,
     "USE_JWT": True,
-    "JWT_AUTH_COOKIE": "_auth",  # Name of access token cookie
-    "JWT_AUTH_REFRESH_COOKIE": "_refresh", # Name of refresh token cookie
-    "JWT_AUTH_HTTPONLY": False,  # Makes sure refresh token is sent
+    "JWT_AUTH_COOKIE": "_auth", 
+    "JWT_AUTH_REFRESH_COOKIE": "_refresh", 
+    "JWT_AUTH_HTTPONLY": False, 
+    "ROTATE_REFRESH_TOKENS": True,
+    "BLACKLIST_AFTER_ROTATION": True,
 }
