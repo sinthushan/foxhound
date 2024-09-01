@@ -9,7 +9,6 @@ class JobList(generics.ListCreateAPIView):
     serializer_class = JobSerializer
     def get_queryset(self):
         user = self.request.user
-        print(user)
         return Job.objects.filter(applicant=user)
 
 class JobDetail(generics.RetrieveUpdateDestroyAPIView):
