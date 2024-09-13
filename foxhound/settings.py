@@ -62,15 +62,20 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'allauth.account.middleware.AccountMiddleware'
+    'user.middleware.AuthorizationMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
+ 
 ]
 
 CORS_ORIGIN_WHITELIST = (
+    'http://localhost:5173',
     'http://localhost:4200',
-    'http://localhost:8000',
-)
 
-CSRF_TRUSTED_ORIGINS = ["http://localhost:4200",] 
+)
+CORS_ALLOW_CREDENTIALS = True
+
+CSRF_TRUSTED_ORIGINS = [ "http://localhost:5173","http://localhost:4200"] 
+
 
 ROOT_URLCONF = 'foxhound.urls'
 
@@ -159,18 +164,18 @@ REST_FRAMEWORK = {
     ]
 }
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(hours=1),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=1),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
-
 }
 
-# dj-rest-auth
+
 REST_AUTH = {
     "TOKEN_MODEL":None,
     "USE_JWT": True,
-    "JWT_AUTH_COOKIE": "_auth", 
-    "JWT_AUTH_REFRESH_COOKIE": "_refresh", 
+    "JWT_AUTH_COOKIE": "auth_token", 
+    "JWT_AUTH_REFRESH_COOKIE": "refresh_token",
     "JWT_AUTH_HTTPONLY": False, 
     "ROTATE_REFRESH_TOKENS": True,
     "BLACKLIST_AFTER_ROTATION": True,
+    'SESSION_LOGIN': False
 }
