@@ -9,6 +9,9 @@ class Job(models.Model):
     applied_date = models.DateField(auto_now_add=True)
     modefied_date = models.DateField(auto_now=True)
 
+    class Meta:
+        ordering = ['applied_date']
+    
     def __str__(self) -> str:
         return f'{self.title} at {self.company}'
     

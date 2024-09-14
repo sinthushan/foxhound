@@ -172,8 +172,6 @@ SIMPLE_JWT = {
 REST_AUTH = {
     "TOKEN_MODEL":None,
     "USE_JWT": True,
-    "JWT_AUTH_COOKIE": "auth_token", 
-    "JWT_AUTH_REFRESH_COOKIE": "refresh_token",
     "JWT_AUTH_HTTPONLY": False, 
     "ROTATE_REFRESH_TOKENS": True,
     "BLACKLIST_AFTER_ROTATION": True,
