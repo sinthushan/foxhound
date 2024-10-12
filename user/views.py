@@ -18,6 +18,12 @@ class ApplicantDetail(APIView):
         user = self.request.user
         serializer = ApplicantSeralizer(user)
         return Response(serializer.data)
+    
+    def put(self, request):
+        user = self.request.user
+        serializer = ApplicantSeralizer(user, data=request.data, partial=True)
+        if serializer.is_valid(): 
+            serializer.save() 
 
 @api_view()
 def link_account(request):
